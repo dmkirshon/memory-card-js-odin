@@ -1,0 +1,9 @@
+.game-header {
+  background-color: teal;
+  border: 1px blue solid;
+}
+
+h1 {
+  text-align: center;
+  font-size: 48px
+}

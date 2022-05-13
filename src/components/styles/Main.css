@@ -1,0 +1,36 @@
+.game-main {
+  background-color: lightcyan;
+  flex: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.game-main-gamebar {
+  flex: 0;
+  display: flex;
+  justify-content: center;
+  font-size: 24px;
+}
+
+.game-main-gameboard {
+  background-color: tan;
+  flex: 1;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  padding: 5vmax;
+}
+
+.game-main-gameboard-card {
+  width: 20vmin;
+  height: 20vmin;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.game-main-gameboard-card-emoji {
+ font-size: 15vmin;
+}
+
