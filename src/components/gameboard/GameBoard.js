@@ -1,17 +1,41 @@
 import React, { useState, useEffect } from "react";
 import Card from "./Card";
 
-const GameBoard = () => {
+const GameBoard = ({ wonGame, lostGame, winGame, loseGame }) => {
   const NUMBER_OF_CARDS = 12;
 
+  const [pickedEmoji, setPickedEmoji] = useState(null);
   const [selectedEmojis, setSelectedEmojis] = useState([]);
-  const [placedEmojis, setplacedEmojis] = useState(placeCards());
+  const [placedEmojis, setPlacedEmojis] = useState(placeCards());
 
-  function checkWinGame() {
-    if (selectedEmojis.length === NUMBER_OF_CARDS) {
-      console.log("You Win");
-    }
+  function selectEmoji(event) {
+    const emojiSelected = event.target.getAttribute("data-index");
+    setPickedEmoji(emojiSelected);
   }
+
+  useEffect(
+    function checkLoseGame() {
+      if (selectedEmojis.includes(pickedEmoji)) {
+        console.log("lose");
+        loseGame();
+      } else if (pickedEmoji !== null) {
+        setSelectedEmojis((prev) => [...prev, pickedEmoji]);
+        setPickedEmoji(null);
+      }
+    },
+    [pickedEmoji, selectedEmojis]
+  );
+
+  useEffect(
+    function checkWinGame() {
+      if (selectedEmojis.length === NUMBER_OF_CARDS) {
+        console.log("You Win");
+      } else if (pickedEmoji !== null && !lostGame) {
+        setPlacedEmojis(placeCards);
+      }
+    },
+    [selectedEmojis, pickedEmoji, loseGame, placeCards]
+  );
 
   function placeCards() {
     const randomCardDigits = [];
@@ -23,7 +47,11 @@ const GameBoard = () => {
       }
     }
     const cardPlacement = randomCardDigits.map((cardNumber) => (
-      <Card key={cardNumber} emojiIndex={cardNumber} />
+      <Card
+        key={cardNumber}
+        emojiIndex={cardNumber}
+        selectEmoji={selectEmoji}
+      />
     ));
     return cardPlacement;
   }
