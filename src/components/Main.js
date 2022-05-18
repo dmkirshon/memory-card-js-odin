@@ -7,8 +7,8 @@ const Main = () => {
   const [playerScore, setPlayerScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
 
-  const winGame = () => setPlayerScore((prevScore) => prevScore + 1);
-  const loseGame = () => {
+  const matchPoint = () => setPlayerScore((prevScore) => prevScore + 1);
+  const endGame = () => {
     if (playerScore > highScore) setHighScore(playerScore);
     setPlayerScore(0);
   };
@@ -16,7 +16,7 @@ const Main = () => {
   return (
     <div className="game-main">
       <GameBar playerScore={playerScore} highScore={highScore} />
-      <GameBoard winGame={winGame} loseGame={loseGame} />
+      <GameBoard matchPoint={matchPoint} endGame={endGame} />
     </div>
   );
 };

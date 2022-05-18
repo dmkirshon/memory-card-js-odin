@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Card from "./Card";
 
-const GameBoard = ({ winGame, loseGame }) => {
+const GameBoard = ({ matchPoint, endGame }) => {
   const NUMBER_OF_CARDS = 12;
 
   const [pickedEmoji, setPickedEmoji] = useState(null);
@@ -14,31 +14,38 @@ const GameBoard = ({ winGame, loseGame }) => {
   }
 
   useEffect(
+    function matchCorrect() {
+      if (pickedEmoji !== null) {
+        setSelectedEmojis((prev) => [...prev, pickedEmoji]);
+        setPickedEmoji(null);
+        matchPoint();
+      }
+    },
+    [pickedEmoji, matchPoint]
+  );
+
+  useEffect(
     function checkLoseGame() {
       if (selectedEmojis.includes(pickedEmoji)) {
         console.log("lose");
-        loseGame();
+        endGame();
         setPickedEmoji(null);
         setSelectedEmojis([]);
-      } else if (pickedEmoji !== null) {
-        setSelectedEmojis((prev) => [...prev, pickedEmoji]);
-
-        setPickedEmoji(null);
       }
     },
-    [loseGame, pickedEmoji, selectedEmojis]
+    [endGame, pickedEmoji, selectedEmojis]
   );
 
   useEffect(
     function checkWinGame() {
       if (selectedEmojis.length === NUMBER_OF_CARDS) {
         console.log("You Win");
-        winGame();
+        endGame();
         setPickedEmoji(null);
         setSelectedEmojis([]);
       }
     },
-    [selectedEmojis, pickedEmoji, winGame]
+    [selectedEmojis, pickedEmoji, endGame]
   );
 
   useEffect(function randomizeGameBoard() {
