@@ -11,6 +11,7 @@ const Card = ({ emojiIndex, selectEmoji }) => {
       data-index={emojiIndex}
       onClick={(e) => selectEmoji(e)}
       className="game-main-gameboard-card"
+      draggable="false"
     >
       {insertEmoji(emojiIndex)}
     </div>

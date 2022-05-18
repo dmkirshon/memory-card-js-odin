@@ -13,20 +13,33 @@
 }
 
 .game-main-gameboard {
-  background-color: tan;
+  background-color: rgba(2, 38, 38, 0.918);
   flex: 1;
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-between;
+  justify-content: space-around;
+  align-items: center;
   padding: 5vmax;
 }
 
 .game-main-gameboard-card {
-  width: 20vmin;
-  height: 20vmin;
-  border: 1px solid black;
+  width: 18vmin;
+  height: 18vmin;
+  border: 3px solid aqua;
+  box-shadow: 0vmin 0vmin 2vmin .25vmin;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 15vmin;
+  font-size: 16vmin;
+  cursor: pointer;
+  user-select: none;
+  transition: all ease-in-out .25s;
+  background-color: rgba(54, 221, 221, 0.512);
+}
+
+.game-main-gameboard-card:hover {
+  width: 22vmin;
+  height: 22vmin;
+  font-size: 16vmin;
+  background-color: rgba(38, 118, 118, 0.512);
 }
