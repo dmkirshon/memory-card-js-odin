@@ -1,10 +1,10 @@
 import React from "react";
 import Score from "./Score";
 
-const GameBar = () => {
+const GameBar = ({ playerScore, highScore }) => {
   return (
     <div className="game-main-gamebar">
-      <Score />
+      <Score playerScore={playerScore} highScore={highScore} />
     </div>
   );
 };

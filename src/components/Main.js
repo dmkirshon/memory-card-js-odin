@@ -1,25 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./styles/Main.css";
 import GameBar from "./gameboard/GameBar";
 import GameBoard from "./gameboard/GameBoard";
 
 const Main = () => {
-  const [wonGame, setWonGame] = useState(false);
-  const [lostGame, setLostGame] = useState(false);
   const [playerScore, setPlayerScore] = useState(0);
+  const [highScore, setHighScore] = useState(0);
 
-  const winGame = () => setWonGame(true);
-  const loseGame = () => setLostGame(true);
+  const winGame = () => setPlayerScore((prevScore) => prevScore + 1);
+  const loseGame = () => {
+    if (playerScore > highScore) setHighScore(playerScore);
+    setPlayerScore(0);
+  };
 
   return (
     <div className="game-main">
-      <GameBar />
-      <GameBoard
-        wonGame={wonGame}
-        lostGame={lostGame}
-        winGame={winGame}
-        loseGame={loseGame}
-      />
+      <GameBar playerScore={playerScore} highScore={highScore} />
+      <GameBoard winGame={winGame} loseGame={loseGame} />
     </div>
   );
 };

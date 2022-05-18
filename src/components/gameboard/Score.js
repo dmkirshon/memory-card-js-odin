@@ -1,7 +1,11 @@
 import React from "react";
 
-const Score = () => {
-  return <div className="game-main-gamebar-score">Score: 0 | Highscore: 0</div>;
+const Score = ({ playerScore, highScore }) => {
+  return (
+    <div className="game-main-gamebar-score">
+      Score: {playerScore} | High Score: {highScore}
+    </div>
+  );
 };
 
 export default Score;
